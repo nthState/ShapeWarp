@@ -37,28 +37,10 @@ private struct PathWarp2<S>: ViewModifier where S: Shape {
   
   public func body(content: Content) -> some View {
     let elements = warpPoints()
-    //SubdividedShape(test: 1, elements: elements)
     
-    Path { path in
-      
-      for element in elements {
-        switch element {
-          
-        case .move(to: let to):
-          path.move(to: to)
-        case .line(to: let to):
-          path.addLine(to: to)
-        case .quadCurve(to: let to, control: let control):
-          path.addQuadCurve(to: to, control: control)
-        case .curve(to: let to, control1: let control1, control2: let control2):
-          path.addCurve(to: to, control1: control1, control2: control2)
-        case .closeSubpath:
-          path.closeSubpath()
-        }
-      }
-      
-    }
-    
+    let points = shape.path(in: CGRect(x: 0, y: 0, width: 100, height: 100)).allPoints()
+
+    return SubdividedShape(allPoints: points, elements: elements)
   }
   
   private func warpPoints() -> [Path.Element] {

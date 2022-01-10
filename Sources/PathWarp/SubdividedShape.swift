@@ -11,17 +11,17 @@
 import SwiftUI
 
 /// A custom shape that is build from a list of subdivided path elements
-struct SubdividedShape: Shape, Animatable {
+public struct SubdividedShape: Shape, Animatable {
   
-  private var test: CGFloat
+  private var allPoints: [CGPoint]
   private var elements: [Path.Element]
   
-  public init(test: CGFloat, elements: [Path.Element]) {
-    self.test = test
+  public init(allPoints: [CGPoint], elements: [Path.Element]) {
+    self.allPoints = allPoints
     self.elements = elements
   }
   
-  func path(in rect: CGRect) -> Path {
+  public func path(in rect: CGRect) -> Path {
     var path = Path()
     
     for element in elements {
@@ -43,13 +43,22 @@ struct SubdividedShape: Shape, Animatable {
     return path
   }
   
-  var animatableData: CGFloat {
-      get {
-        test
-      }
-      set {
-        test = newValue
-      }
+  public var animatableData: [CGPoint] {
+      get { allPoints }
+      set { allPoints = newValue }
   }
+  
+}
+
+extension Path.Element: Animatable {
+  
+//  public var animatableData: Bool {
+//      get {
+//        self.
+//      }
+//      set {
+//        elements = newValue
+//      }
+//  }
   
 }

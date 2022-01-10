@@ -11,27 +11,15 @@ import SwiftUI
 
 public extension Shape {
 
-  func warp(amount: CGFloat, seed: UInt64, include: Connection = .all) -> some Shape {
-    return PathWarp(shape: self, amount: amount, seed: seed, include: include)
+  func warp3(amount: CGFloat, seed: UInt64, include: Connection = .all) -> Path {
+    return PathWarp3(shape: self, amount: amount, seed: seed, include: include)
       .warp()
+      .path(in: CGRect(x: 0, y: 0, width: 100, height: 100))
   }
   
 }
 
-public struct Connection: OptionSet {
-  public let rawValue: Int
-  
-  public static let joint = Connection(rawValue: 1)
-  public static let control = Connection(rawValue: 1 << 1)
-  
-  public static let all: Connection = [.joint, .control]
-  
-  public init(rawValue: Int) {
-    self.rawValue = rawValue
-  }
-}
-
-private struct PathWarp<S>: Animatable where S: Shape {
+private struct PathWarp3<S>: Animatable where S: Shape {
   
   let shape: S
   let amount: CGFloat
@@ -52,7 +40,7 @@ private struct PathWarp<S>: Animatable where S: Shape {
   public func warp() -> some Shape {
     
     let elements = warpPoints()
-
+    
     let points = shape.path(in: CGRect(x: 0, y: 0, width: 100, height: 100)).allPoints()
 
     return SubdividedShape(allPoints: points, elements: elements)
@@ -119,7 +107,7 @@ private struct PathWarp<S>: Animatable where S: Shape {
 
 // MARK: Randomness
 
-extension PathWarp {
+extension PathWarp3 {
   
   func warp(_ point: CGPoint, amount: CGFloat) -> CGPoint {
     
