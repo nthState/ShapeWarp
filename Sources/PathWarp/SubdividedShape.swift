@@ -13,24 +13,28 @@ import SwiftUI
 /// A custom shape that is build from a list of subdivided path elements
 public struct SubdividedShape: Shape, Animatable {
   
-  private var allPoints: [CGPoint]
-  private var elements: [Path.Element]
+  private var elements: [AnimatableElement]
   
-  public init(allPoints: [CGPoint], elements: [Path.Element]) {
-    self.allPoints = allPoints
+  public init(elements: [AnimatableElement]) {
     self.elements = elements
   }
   
   public func path(in rect: CGRect) -> Path {
     var path = Path()
     
+    
+//    path.move(to: .zero)
+//    for pt in allPoints {
+//      path.addLine(to: pt)
+//    }
+//    path.closeSubpath()
+    
     for element in elements {
-      switch element {
-        
+      switch element.type {
       case .move(to: let to):
-        path.move(to: to)
+        path.move(to: CGPoint(x: element.to.first, y: element.to.second))
       case .line(to: let to):
-        path.addLine(to: to)
+        path.addLine(to:  CGPoint(x: element.to.first, y: element.to.second))
       case .quadCurve(to: let to, control: let control):
         path.addQuadCurve(to: to, control: control)
       case .curve(to: let to, control1: let control1, control2: let control2):
@@ -43,22 +47,9 @@ public struct SubdividedShape: Shape, Animatable {
     return path
   }
   
-  public var animatableData: [CGPoint] {
-      get { allPoints }
-      set { allPoints = newValue }
+  public var animatableData: AnimatablePathElement {
+    get { .init(elements: elements.map { AnimatableElement(type: $0.type, to: $0.to) }) }
+    set { elements = newValue.elements.map { AnimatableElement(type: $0.type, to: $0.to) } }
   }
-  
-}
-
-extension Path.Element: Animatable {
-  
-//  public var animatableData: Bool {
-//      get {
-//        self.
-//      }
-//      set {
-//        elements = newValue
-//      }
-//  }
   
 }

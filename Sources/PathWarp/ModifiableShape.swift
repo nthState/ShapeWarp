@@ -94,34 +94,111 @@ import SwiftUI
 //
 //}
 
+
 public struct ModifiableShape: Shape, Animatable {
 
-  private var allPoints: [CGPoint]
-  private var path: Path
+  var points: [CGPoint]
 
-  public init(allPoints: [CGPoint], path: Path) {
-    self.allPoints = allPoints
-    self.path = path
+  public init(points: [CGPoint]) {
+    self.points = points
   }
 
   public func path(in rect: CGRect) -> Path {
-    let _ = path.allElements()
-    return Path { p in
-      p.addPath(self.path)
+
+//    return Path { p in
+//      p.addPath(self.path)
+//    }
+    Path { path in
+      path.move(to: .zero)
+      //let ct = count
+      for pt in points {
+      var j = 0
+      //for i in Int(count)..<Int(count)+5 {
+      //for i in 0..<5 {
+        //let pt = points[i]
+        path.addLine(to: pt)
+        j += 1
+      }
+      path.closeSubpath()
     }
+    
   }
 
-  public var animatableData: [CGPoint] {
-      get { allPoints }
-      set { allPoints = newValue }
+  public var animatableData: AnimatableCGPoint {
+      get { .init(points: points.map { CGPoint.AnimatableData($0.x, $0.y) }) }
+      set { points = newValue.points.map { CGPoint(x: $0.first, y: $0.second) } }
   }
-  
-//  var animatableData: AnimatablePair<Path, Bool> {
-//    get { AnimatablePair(path, isAnimating) }
-//    set { (path, isAnimating) = (newValue.first, newValue.second) }
-//  }
 
 }
+
+
+public struct AnimatableCGPoint: VectorArithmetic {
+  var points: [CGPoint.AnimatableData]
+  
+  public static func + (lhs: AnimatableCGPoint, rhs: AnimatableCGPoint) -> AnimatableCGPoint {
+      return add(lhs: lhs, rhs: rhs, +)
+  }
+  
+  public static func - (lhs: AnimatableCGPoint, rhs: AnimatableCGPoint) -> AnimatableCGPoint {
+      return add(lhs: lhs, rhs: rhs, -)
+  }
+  
+  static func add(lhs: AnimatableCGPoint, rhs: AnimatableCGPoint, _ sign: (CGFloat, CGFloat) -> CGFloat) -> AnimatableCGPoint {
+      let maxPoints = max(lhs.points.count, rhs.points.count)
+      let leftIndices = lhs.points.indices
+      let rightIndices = rhs.points.indices
+      
+      var newPoints: [CGPoint.AnimatableData] = []
+      (0 ..< maxPoints).forEach { index in
+          if leftIndices.contains(index) && rightIndices.contains(index) {
+              // Merge points
+              let lhsPoint = lhs.points[index]
+              let rhsPoint = rhs.points[index]
+              newPoints.append(
+                  .init(
+                      sign(lhsPoint.first, rhsPoint.first),
+                      sign(lhsPoint.second, rhsPoint.second)
+                  )
+              )
+          } else if rightIndices.contains(index), let lastLeftPoint = lhs.points.last {
+              // Right side has more points, collapse to last left point
+              let rightPoint = rhs.points[index]
+              newPoints.append(
+                  .init(
+                      sign(lastLeftPoint.first, rightPoint.first),
+                      sign(lastLeftPoint.second, rightPoint.second)
+                  )
+              )
+          } else if leftIndices.contains(index), let lastPoint = newPoints.last {
+              // Left side has more points, collapse to last known point
+              let leftPoint = lhs.points[index]
+              newPoints.append(
+                  .init(
+                      sign(lastPoint.first, leftPoint.first),
+                      sign(lastPoint.second, leftPoint.second)
+                  )
+              )
+          }
+      }
+      
+      return .init(points: newPoints)
+  }
+  
+  mutating public func scale(by rhs: Double) {
+      points.indices.forEach { index in
+          self.points[index].scale(by: rhs)
+      }
+  }
+  
+  public var magnitudeSquared: Double {
+      return 1.0
+  }
+  
+  public static var zero: AnimatableCGPoint {
+      return .init(points: [])
+  }
+}
+
 
 func Cartesian(length:Double, angle:Double) -> CGPoint {
     return CGPoint(x: length * cos(angle), y: length * sin(angle))

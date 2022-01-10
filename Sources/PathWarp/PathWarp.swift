@@ -53,9 +53,22 @@ private struct PathWarp<S>: Animatable where S: Shape {
     
     let elements = warpPoints()
 
-    let points = shape.path(in: CGRect(x: 0, y: 0, width: 100, height: 100)).allPoints()
+    let animatableElements: [AnimatableElement] = elements.compactMap ({ element in
+      switch element {
+      case .move(to: let to):
+        return AnimatableElement(type: .move(to: to), to: to.animatableData)
+      case .line(to: let to):
+        return AnimatableElement(type: .line(to: to), to: to.animatableData)
+      case .quadCurve(to: let to, control: let control):
+        return AnimatableElement(type: .closeSubpath, to:.zero)
+      case .curve(to: let to, control1: let control1, control2: let control2):
+        return AnimatableElement(type: .closeSubpath, to:.zero)
+      case .closeSubpath:
+        return  AnimatableElement(type: .closeSubpath, to:.zero)
+      }
+    })
 
-    return SubdividedShape(allPoints: points, elements: elements)
+    return SubdividedShape(elements: animatableElements)
   }
   
   private func warpPoints() -> [Path.Element] {
