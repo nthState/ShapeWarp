@@ -56,15 +56,15 @@ private struct PathWarp<S>: Animatable where S: Shape {
     let animatableElements: [AnimatableElement] = elements.compactMap ({ element in
       switch element {
       case .move(to: let to):
-        return AnimatableElement(type: .move(to: to), to: to.animatableData)
+        return AnimatableElement(type: .move(to: to), to: to.animatableData, control1: .zero, control2: .zero)
       case .line(to: let to):
-        return AnimatableElement(type: .line(to: to), to: to.animatableData)
+        return AnimatableElement(type: .line(to: to), to: to.animatableData, control1: .zero, control2: .zero)
       case .quadCurve(to: let to, control: let control):
-        return AnimatableElement(type: .closeSubpath, to:.zero)
+        return AnimatableElement(type: .closeSubpath, to: to.animatableData, control1: control.animatableData, control2: .zero)
       case .curve(to: let to, control1: let control1, control2: let control2):
-        return AnimatableElement(type: .closeSubpath, to:.zero)
+        return AnimatableElement(type: .closeSubpath, to: to.animatableData, control1: control1.animatableData, control2: control2.animatableData)
       case .closeSubpath:
-        return  AnimatableElement(type: .closeSubpath, to:.zero)
+        return AnimatableElement(type: .closeSubpath, to:.zero, control1: .zero, control2: .zero)
       }
     })
 

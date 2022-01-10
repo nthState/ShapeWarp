@@ -48,8 +48,22 @@ public struct SubdividedShape: Shape, Animatable {
   }
   
   public var animatableData: AnimatablePathElement {
-    get { .init(elements: elements.map { AnimatableElement(type: $0.type, to: $0.to) }) }
-    set { elements = newValue.elements.map { AnimatableElement(type: $0.type, to: $0.to) } }
+    get {
+      .init(elements: elements.map {
+        AnimatableElement(type: $0.type,
+                          to: $0.to,
+                          control1: $0.control1,
+                          control2: $0.control2)
+      })
+    }
+    set {
+      elements = newValue.elements.map {
+        AnimatableElement(type: $0.type,
+                          to: $0.to,
+                          control1: $0.control1,
+                          control2: $0.control2)
+      }
+    }
   }
   
 }
