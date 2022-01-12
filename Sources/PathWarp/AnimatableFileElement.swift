@@ -9,7 +9,24 @@
 
 import SwiftUI
 
-public struct AnimatableElement: Equatable {
+extension Path.Element {
+  struct AnimatableData {
+    let type: Path.Element
+    var to: CGPoint.AnimatableData
+    var control1: CGPoint.AnimatableData
+    var control2: CGPoint.AnimatableData
+    
+    public static func == (lhs: Path.Element.AnimatableData, rhs:  Path.Element.AnimatableData) -> Bool {
+      lhs.to == rhs.to &&
+      lhs.type == rhs.type &&
+      lhs.control1 == rhs.control1 &&
+      lhs.control2 == rhs.control2
+    }
+  }
+}
+
+/// A container for Path.Element and making the points animatable
+internal struct AnimatableElement: Equatable {
   let type: Path.Element
   var to: CGPoint.AnimatableData
   var control1: CGPoint.AnimatableData
@@ -23,7 +40,7 @@ public struct AnimatableElement: Equatable {
   }
 }
 
-public struct AnimatablePathElement: VectorArithmetic {
+internal struct AnimatablePathElement: VectorArithmetic {
   
   var elements: [AnimatableElement]
   

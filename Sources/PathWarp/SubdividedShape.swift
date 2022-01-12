@@ -11,34 +11,27 @@
 import SwiftUI
 
 /// A custom shape that is build from a list of subdivided path elements
-public struct SubdividedShape: Shape, Animatable {
+internal struct SubdividedShape: Shape, Animatable {
   
   private var elements: [AnimatableElement]
   
-  public init(elements: [AnimatableElement]) {
+  internal init(elements: [AnimatableElement]) {
     self.elements = elements
   }
   
-  public func path(in rect: CGRect) -> Path {
+  internal func path(in rect: CGRect) -> Path {
     var path = Path()
-    
-    
-//    path.move(to: .zero)
-//    for pt in allPoints {
-//      path.addLine(to: pt)
-//    }
-//    path.closeSubpath()
-    
+
     for element in elements {
       switch element.type {
-      case .move(to: let to):
-        path.move(to: CGPoint(x: element.to.first, y: element.to.second))
-      case .line(to: let to):
-        path.addLine(to:  CGPoint(x: element.to.first, y: element.to.second))
-      case .quadCurve(to: let to, control: let control):
-        path.addQuadCurve(to: to, control: control)
-      case .curve(to: let to, control1: let control1, control2: let control2):
-        path.addCurve(to: to, control1: control1, control2: control2)
+      case .move(to: _):
+        path.move(to: CGPoint(element.to))
+      case .line(to: _):
+        path.addLine(to:  CGPoint(element.to))
+      case .quadCurve(to: _, control: _):
+        path.addQuadCurve(to: CGPoint(element.to), control: CGPoint(element.control1))
+      case .curve(to: _, control1: _, control2: _):
+        path.addCurve(to: CGPoint(element.to), control1: CGPoint(element.control1), control2: CGPoint(element.control2))
       case .closeSubpath:
         path.closeSubpath()
       }

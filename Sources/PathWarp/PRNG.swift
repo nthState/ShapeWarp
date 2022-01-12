@@ -7,7 +7,7 @@
 import Foundation
 
 ///  Main Pseudo-Random Number Generator
-public class PRNG {
+internal class PRNG {
     var seed: UInt64
     var rngState: (UInt64, UInt64) = (0, 0)
     var generator: Xoroshiro128Plus

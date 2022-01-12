@@ -1,3 +1,3 @@
 # Chris's SwiftUI Path Warp
 
-A description of this package.
+PathWarp modifies a shape and produces a new shape where the control points have been shifted

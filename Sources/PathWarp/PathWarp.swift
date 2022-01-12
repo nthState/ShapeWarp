@@ -10,37 +10,51 @@
 import SwiftUI
 
 public extension Shape {
-
-  func warp(amount: CGFloat, seed: UInt64, include: Connection = .all) -> some Shape {
+  
+  /// Warp a shape's control points
+  /// - Parameters:
+  ///   - amount: How much to warp
+  ///   - seed: pseudo-random seed to apply
+  ///   - include: Act upon, control points, joints, or all
+  /// - Returns: A new shape
+  func warp(amount: CGFloat, seed: UInt64, include: PointType = .all) -> some Shape {
     return PathWarp(shape: self, amount: amount, seed: seed, include: include)
       .warp()
   }
   
 }
 
-public struct Connection: OptionSet {
+/// The start/end of a line, or a control point for a line
+public struct PointType: OptionSet {
   public let rawValue: Int
   
-  public static let joint = Connection(rawValue: 1)
-  public static let control = Connection(rawValue: 1 << 1)
-  
-  public static let all: Connection = [.joint, .control]
+  /// Start/End of a line
+  public static let joint = PointType(rawValue: 1)
+  /// Control point for a bezier line
+  public static let control = PointType(rawValue: 1 << 1)
+  /// All type of points
+  public static let all: PointType = [.joint, .control]
   
   public init(rawValue: Int) {
     self.rawValue = rawValue
   }
 }
 
-private struct PathWarp<S>: Animatable where S: Shape {
+public struct PathWarp<S>: Animatable where S: Shape {
   
   let shape: S
   let amount: CGFloat
   let seed: UInt64
-  let include: Connection
+  let include: PointType
   
   var generator: PRNG
   
-  init(shape: S, amount: CGFloat, seed: UInt64, include: Connection) {
+  /// Initalizes a PathWarp
+  /// - Parameters:
+  ///   - amount: How much to warp
+  ///   - seed: pseudo-random seed to apply
+  ///   - include: Act upon, control points, joints, or all
+  public init(shape: S, amount: CGFloat, seed: UInt64, include: PointType) {
     self.shape = shape
     self.amount = amount
     self.seed = seed
