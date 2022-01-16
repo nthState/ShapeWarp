@@ -1,5 +1,5 @@
 @Tutorial() {
-  @Intro(title: "Getting Start with PathWarp in SwiftUI") {
+  @Intro(title: "Getting Started with PathWarp in SwiftUI") {
     In this tutorial, I'll show you how to integrate PathWarp
     into your SwiftUI project to warp some shapes!
     

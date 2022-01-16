@@ -74,9 +74,9 @@ public struct PathWarp<S>: Animatable where S: Shape {
       case .line(to: let to):
         return AnimatableElement(type: .line(to: to), to: to.animatableData, control1: .zero, control2: .zero)
       case .quadCurve(to: let to, control: let control):
-        return AnimatableElement(type: .closeSubpath, to: to.animatableData, control1: control.animatableData, control2: .zero)
+        return AnimatableElement(type: .quadCurve(to: to, control: control), to: to.animatableData, control1: control.animatableData, control2: control.animatableData)
       case .curve(to: let to, control1: let control1, control2: let control2):
-        return AnimatableElement(type: .closeSubpath, to: to.animatableData, control1: control1.animatableData, control2: control2.animatableData)
+        return AnimatableElement(type: .curve(to: to, control1: control1, control2: control2), to: to.animatableData, control1: control1.animatableData, control2: control2.animatableData)
       case .closeSubpath:
         return AnimatableElement(type: .closeSubpath, to:.zero, control1: .zero, control2: .zero)
       }
@@ -114,9 +114,13 @@ public struct PathWarp<S>: Animatable where S: Shape {
         
         lastPoint = toPoint
       case .quadCurve(to: let to, control: let control):
-#warning("TODO: Chris to fill in")
-        elements.append(.quadCurve(to: to, control: control))
-        break
+
+        let toPoint = include.contains(.joint) ? warp(to, amount: self.amount) : to
+        let controlPoint = include.contains(.control) ? warp(control, amount: self.amount) : control
+        
+        elements.append(.quadCurve(to: toPoint, control: controlPoint))
+        
+        lastPoint = toPoint
       case .curve(to: let to, control1: let control1, control2: let control2):
         
         let toPoint = include.contains(.joint) ? warp(to, amount: self.amount) : to
