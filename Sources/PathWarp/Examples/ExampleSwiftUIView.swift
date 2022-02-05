@@ -18,16 +18,16 @@ extension ExampleSwiftUIView: View {
   var body: some View {
     VStack(spacing: 24) {
       test1
-//      test2
-//      test3
-//      controls
+      test2
+      test3
+      controls
     }
   }
   
   var test1: some View {
     Rectangle()
-      .warp(amount: 10, seed: 0987654321)
-      .stroke(Color.red, lineWidth: 2)
+      .warp(amount: isAnimating ? 1 : 20, seed: 45678)
+      .fill(Color.yellow)
       .frame(width: 100, height: 100)
   }
   
