@@ -18,7 +18,7 @@ public extension Shape {
   ///   - include: Act upon, control points, joints, or all
   /// - Returns: A new shape
   func warp(amount: CGFloat, seed: UInt64, include: PointType = .all) -> some Shape {
-    return PathWarp(shape: self, amount: amount, seed: seed, include: include)
+    return PathWarper(shape: self, amount: amount, seed: seed, include: include)
       .warp()
   }
   
@@ -40,7 +40,7 @@ public struct PointType: OptionSet {
   }
 }
 
-public struct PathWarp<S>: Animatable where S: Shape {
+public struct PathWarper<S>: Animatable where S: Shape {
   
   let shape: S
   let amount: CGFloat
@@ -150,7 +150,7 @@ public struct PathWarp<S>: Animatable where S: Shape {
 
 // MARK: Randomness
 
-extension PathWarp {
+extension PathWarper {
   
   func warp(_ point: CGPoint, amount: CGFloat) -> CGPoint {
     
