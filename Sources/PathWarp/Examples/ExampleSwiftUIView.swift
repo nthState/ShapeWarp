@@ -18,16 +18,16 @@ extension ExampleSwiftUIView: View {
   var body: some View {
     VStack(spacing: 24) {
       test1
-      test2
-      test3
-      controls
+//      test2
+//      test3
+//      controls
     }
   }
   
   var test1: some View {
     Rectangle()
-      .warp(amount: isAnimating ? 1 : 20, seed: 45678)
-      .fill(Color.yellow)
+      .warp(amount: 10, seed: 0987654321)
+      .stroke(Color.red, lineWidth: 2)
       .frame(width: 100, height: 100)
   }
   
@@ -57,8 +57,10 @@ extension ExampleSwiftUIView: View {
   }
 }
 
+#if DEBUG
 struct ExampleSwiftUIView_Previews: PreviewProvider {
   static var previews: some View {
     ExampleSwiftUIView()
   }
 }
+#endif

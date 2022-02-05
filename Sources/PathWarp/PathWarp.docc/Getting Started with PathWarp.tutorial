@@ -37,15 +37,15 @@
         The seed was randomly selected until the shape looks how I wanted it
         
         @Code(name: "Rectangle Warp", file: "03_RectangleWarp.swift") {
-          @Image(source: file, alt: "accessible description")
+          @Image(source: "03_RectangleWarp.png", alt: "accessible description")
         }
       }
       
       @Step {
-        The same warp with amount with a different seed looks different
+        Change the seed, the warp now looks different
         
         @Code(name: "Rectangle Warp", file: "04_RectangleWarp.swift") {
-          
+          @Image(source: "04_RectangleWarp.png", alt: "accessible description")
         }
       }
     }

@@ -64,7 +64,7 @@ public struct PathWarp<S>: Animatable where S: Shape {
   }
   
   public func warp() -> some Shape {
-    
+
     let elements = warpPoints()
 
     let animatableElements: [AnimatableElement] = elements.compactMap ({ element in
@@ -153,6 +153,11 @@ public struct PathWarp<S>: Animatable where S: Shape {
 extension PathWarp {
   
   func warp(_ point: CGPoint, amount: CGFloat) -> CGPoint {
+    
+    // TODO, can we move this elsewhere so it's hit once?
+    guard amount > 0 else {
+      return point
+    }
     
     return CGPoint(x: point.x + CGFloat(generator.getRandomNumber(min: 0, max: UInt64(amount))),
                    y: point.y + CGFloat(generator.getRandomNumber(min: 0, max: UInt64(amount))))
