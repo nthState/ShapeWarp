@@ -13,7 +13,9 @@ Rectangle()
   .warp(amount: 10, seed: 45678)
 ```
 
-![Warped](Sources/PathWarp/PathWarp.docc/Resources/Images/01_RectangleWarp.png)
+| Before | After |
+------------------
+![Warped](Sources/PathWarp/PathWarp.docc/Resources/Images/01_RectangleWarp.png)|![Warped](Sources/PathWarp/PathWarp.docc/Resources/Images/04_RectangleWarp.png)
 
 We've written an extension
 
