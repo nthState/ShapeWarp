@@ -14,7 +14,7 @@ Rectangle()
 ```
 
 | Before | After |
-------------------
+|--------|-------|
 ![Warped](Sources/PathWarp/PathWarp.docc/Resources/Images/01_RectangleWarp.png)|![Warped](Sources/PathWarp/PathWarp.docc/Resources/Images/04_RectangleWarp.png)
 
 We've written an extension
