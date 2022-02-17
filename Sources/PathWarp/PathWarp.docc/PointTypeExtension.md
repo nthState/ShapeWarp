@@ -1,6 +1,6 @@
 # ``PathWarp/PointType``
 
-You may not want to warp all points on a shape.
+You may not want to warp all elements on a shape.
 
 If you want to warp just the line start/finish points, provide:
 

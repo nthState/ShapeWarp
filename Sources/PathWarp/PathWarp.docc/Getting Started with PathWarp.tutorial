@@ -3,14 +3,12 @@
     In this tutorial, I'll show you how to integrate PathWarp
     into your SwiftUI project to warp some shapes!
     
-    @Image(source: file, alt: "accessible description")
   }
   
   @Section(title: "Warping a Rectangle") {
     @ContentAndMedia {
       Let's get started with a Rectangle
       
-      @Image(source: file, alt: "accessible description")
     }
     
     @Steps {

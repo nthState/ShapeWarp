@@ -92,12 +92,10 @@ public struct PathWarper<S>: Animatable where S: Shape {
     var elements: [Path.Element] = []
     
     var startPoint: CGPoint?
-    var lastPoint: CGPoint = .zero
     
     path.forEach { element in
       switch element {
       case .move(to: let to):
-        lastPoint = to
         
         elements.append(.move(to: to))
         
@@ -112,7 +110,6 @@ public struct PathWarper<S>: Animatable where S: Shape {
         
         elements.append(Path.Element.line(to: toPoint))
         
-        lastPoint = toPoint
       case .quadCurve(to: let to, control: let control):
 
         let toPoint = include.contains(.joint) ? warp(to, amount: self.amount) : to
@@ -120,7 +117,6 @@ public struct PathWarper<S>: Animatable where S: Shape {
         
         elements.append(.quadCurve(to: toPoint, control: controlPoint))
         
-        lastPoint = toPoint
       case .curve(to: let to, control1: let control1, control2: let control2):
         
         let toPoint = include.contains(.joint) ? warp(to, amount: self.amount) : to
@@ -129,16 +125,13 @@ public struct PathWarper<S>: Animatable where S: Shape {
         
         elements.append(.curve(to: toPoint, control1: controlPoint1, control2: controlPoint2))
         
-        lastPoint = toPoint
       case .closeSubpath:
         
-        guard let to = startPoint else {
+        guard startPoint != nil else {
           return
         }
         
         elements.append(.closeSubpath)
-        
-        lastPoint = to
       }
     }
     

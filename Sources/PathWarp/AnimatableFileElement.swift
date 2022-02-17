@@ -9,7 +9,7 @@
 
 import SwiftUI
 
-/// A container for Path.Element and making the points animatable
+/// A container for Path.Element, making the points animatable
 internal struct AnimatableElement: Equatable {
   let type: Path.Element
   var to: CGPoint.AnimatableData
@@ -26,7 +26,7 @@ internal struct AnimatableElement: Equatable {
 
 internal struct AnimatablePathElement: VectorArithmetic {
   
-  var elements: [AnimatableElement]
+  internal var elements: [AnimatableElement]
   
   public static func + (lhs: AnimatablePathElement, rhs: AnimatablePathElement) -> AnimatablePathElement {
     return add(lhs: lhs, rhs: rhs, +)
