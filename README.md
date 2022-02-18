@@ -1,6 +1,6 @@
-# Chris's SwiftUI Path Warp
+# Chris's SwiftUI Shape Warp
 
-PathWarp modifies a `shape` and produces a new `shape` where the control
+ShapeWarp modifies a `shape` and produces a new `shape` where the control
 points have been shifted by an `amount`.
 We also provide a `seed` value for pseudo-randomness
 
@@ -15,7 +15,7 @@ Rectangle()
 
 | Before | After |
 |--------|-------|
-![Warped](Sources/PathWarp/PathWarp.docc/Resources/Images/01_RectangleWarp.png)|![Warped](Sources/PathWarp/PathWarp.docc/Resources/Images/04_RectangleWarp.png)
+![Warped](Sources/ShapeWarp/ShapeWarp.docc/Resources/Images/01_RectangleWarp.png)|![Warped](Sources/ShapeWarp/ShapeWarp.docc/Resources/Images/04_RectangleWarp.png)
 
 We've written an extension
 
