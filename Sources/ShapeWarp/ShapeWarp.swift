@@ -1,10 +1,10 @@
 //
-//  PathWarp.swift
-//  PathWarp
+//  ShapeWarp.swift
+//  ShapeWarp
 //
 //  Copyright © 2022 Chris Davis, https://www.nthState.com
 //
-//  See https://github.com/nthState/PathWarp/blob/main/LICENSE for license information.
+//  See https://github.com/nthState/ShapeWarp/blob/main/LICENSE for license information.
 //
 
 import SwiftUI
@@ -18,7 +18,7 @@ public extension Shape {
   ///   - include: Act upon, control points, joints, or all
   /// - Returns: A new shape
   func warp(amount: CGFloat, seed: UInt64, include: PointType = .all) -> some Shape {
-    return PathWarper(shape: self, amount: amount, seed: seed, include: include)
+    return ShapeWarper(shape: self, amount: amount, seed: seed, include: include)
       .warp()
   }
   
@@ -40,7 +40,7 @@ public struct PointType: OptionSet {
   }
 }
 
-public struct PathWarper<S>: Animatable where S: Shape {
+public struct ShapeWarper<S>: Animatable where S: Shape {
   
   let shape: S
   let amount: CGFloat
@@ -143,7 +143,7 @@ public struct PathWarper<S>: Animatable where S: Shape {
 
 // MARK: Randomness
 
-extension PathWarper {
+extension ShapeWarper {
   
   func warp(_ point: CGPoint, amount: CGFloat) -> CGPoint {
     

@@ -4,14 +4,14 @@
 //
 //  Copyright © 2022 Chris Davis, https://www.nthState.com
 //
-//  See https://github.com/nthState/PathWarp/blob/main/LICENSE for license information.
+//  See https://github.com/nthState/ShapeWarp/blob/main/LICENSE for license information.
 //
 
 import XCTest
 import SwiftUI
-@testable import PathWarp
+@testable import ShapeWarp
 
-final class PathWarpTests: XCTestCase {
+final class ShapeWarpTests: XCTestCase {
   
   func test_zero_settings_has_no_affect() throws {
     

@@ -21,7 +21,7 @@
       }
       
       @Step {
-        Import the ``PathWarp`` Swift Package
+        Import the ``ShapeWarp`` Swift Package
         
         @Code(name: "Rectangle Warp", file: "02_RectangleWarp.swift") {
           @Image(source: "02_RectangleWarp.png", alt: "accessible description")

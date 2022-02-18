@@ -1,12 +1,12 @@
 @Tutorials(name: "aa") {
-    @Intro(title: "Guides to using PathWarp with SwiftUI") {
+    @Intro(title: "Guides to using ShapeWarp with SwiftUI") {
 
     }
     
     @Chapter(name: "Getting Started") {
         Getting Started Warping a Shape
       
-        @TutorialReference(tutorial: "doc:Getting-Started-with-PathWarp")
+        @TutorialReference(tutorial: "doc:Getting-Started-with-ShapeWarp")
     }
     
 }

@@ -1,12 +1,12 @@
-# ``PathWarp``
+# ``ShapeWarp``
 
-PathWarp modifies a `shape` and produces a new `shape` where the control
+ShapeWarp modifies a `shape` and produces a new `shape` where the control
 points have been shifted by an `amount`.
 We also provide a `seed` value for pseudo-randomness
 
 ## Overview
 
-Warping shapes is straight forward with PathWarp
+Warping shapes is straight forward with ShapeWarp
 
 ```
 Rectangle()
@@ -25,5 +25,4 @@ extension Shape {
 
 ### Guides
 
-- <doc:Getting-Started-with-PathWarp>
-- <doc:Developer-Diary>
+- <doc:Getting-Started-with-ShapeWarp>
