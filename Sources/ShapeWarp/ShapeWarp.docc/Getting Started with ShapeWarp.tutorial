@@ -15,7 +15,7 @@
       @Step {
         Start of with a simple view, this one displays a Rectangle with a red border
         
-        @Code(name: "Rectangle Warp", file: "01_RectangleWarp.swift") {
+        @Code(name: "RectangleWarp.swift", file: "01_RectangleWarp.swift") {
           @Image(source: "01_RectangleWarp.png", alt: "accessible description")
         }
       }
@@ -23,7 +23,7 @@
       @Step {
         Import the ``ShapeWarp`` Swift Package
         
-        @Code(name: "Rectangle Warp", file: "02_RectangleWarp.swift") {
+        @Code(name: "RectangleWarp.swift", file: "02_RectangleWarp.swift") {
           @Image(source: "02_RectangleWarp.png", alt: "accessible description")
         }
       }
@@ -34,7 +34,7 @@
         We set amount to a low number, so the x/y values will be in the range -10 to 10.
         The seed was randomly selected until the shape looks how I wanted it
         
-        @Code(name: "Rectangle Warp", file: "03_RectangleWarp.swift") {
+        @Code(name: "RectangleWarp.swift", file: "03_RectangleWarp.swift") {
           @Image(source: "03_RectangleWarp.png", alt: "accessible description")
         }
       }
@@ -42,7 +42,7 @@
       @Step {
         Change the seed, the warp now looks different
         
-        @Code(name: "Rectangle Warp", file: "04_RectangleWarp.swift") {
+        @Code(name: "RectangleWarp.swift", file: "04_RectangleWarp.swift") {
           @Image(source: "04_RectangleWarp.png", alt: "accessible description")
         }
       }

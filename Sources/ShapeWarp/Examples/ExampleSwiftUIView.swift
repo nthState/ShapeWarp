@@ -26,7 +26,7 @@ extension ExampleSwiftUIView: View {
   
   var test1: some View {
     Rectangle()
-      .warp(amount: isAnimating ? 1 : 20, seed: 45678)
+      .warp(amount: isAnimating ? 20 : 0, seed: 45678)
       .fill(Color.yellow)
       .frame(width: 100, height: 100)
   }
