@@ -2,11 +2,14 @@
 
 ShapeWarp modifies a `shape` and produces a new `shape` where the control
 points have been shifted by an `amount`.
+
 We also provide a `seed` value for pseudo-randomness
 
 ## Overview
 
 Warping shapes is straight forward with ShapeWarp
+
+![Warped](04_RectangleWarp.png)
 
 ```
 Rectangle()
