@@ -1,4 +1,4 @@
-@Tutorials(name: "aa") {
+@Tutorials(name: "Chris") {
     @Intro(title: "Guides to using ShapeWarp with SwiftUI") {
 
     }
