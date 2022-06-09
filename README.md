@@ -43,10 +43,10 @@ swift build
 ```
 
 ```
-swift package --allow-writing-to-directory docs \
+swift package --allow-writing-to-directory ./docs \
     generate-documentation --target ShapeWarp \
     --disable-indexing \
     --transform-for-static-hosting \
-    --hosting-base-path /ShapeWarp \
-    --output-path docs
+    --hosting-base-path ShapeWarp \
+    --output-path ./docs
  ```
