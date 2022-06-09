@@ -34,7 +34,7 @@ This has been done by implementing `VectorArithmetic` on a custom `AnimatablePat
 
 ## Documentation
 
-Doc website here: https://nthstate.github.io/ShapeWarp/
+Doc website here: https://nthstate.github.io/ShapeWarp/documentation/shapewarp/
 
 Building the docs
 
