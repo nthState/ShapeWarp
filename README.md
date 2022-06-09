@@ -31,3 +31,23 @@ I've spent time getting this package to a point where the shapes themselves anim
 between different settings.
 This has been done by implementing `VectorArithmetic` on a custom `AnimatablePathElement` type
 
+
+## Documentation
+
+Doc website here: https://nthstate.github.io/ShapeWarp/
+
+Building the docs
+
+```
+swift build
+```
+
+```
+swift package \
+ --allow-writing-to-directory ./docs \
+ generate-documentation \
+ --target ShapeWarp \
+ --output-path ./docs \
+ --transform-for-static-hosting \
+ --hosting-base-path ShapeWarp
+ ```
